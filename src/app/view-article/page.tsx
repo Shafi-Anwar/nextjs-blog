@@ -23,6 +23,7 @@ export default function ViewArticles() {
       const data = await getAllArticles();
       setArticles(data);
     } catch (err) {
+      console.error(err);
       setError("Failed to load articles. Please try again.");
     } finally {
       setLoading(false);
@@ -38,9 +39,10 @@ export default function ViewArticles() {
       return;
     setDeletingId(id);
     try {
-      await deleteArticle(id);
+      await deleteArticle(id); // Now correctly uses POST with body
       await fetchArticles();
     } catch (err) {
+      console.error(err);
       setError("Failed to delete article. Please try again.");
     } finally {
       setDeletingId(null);
