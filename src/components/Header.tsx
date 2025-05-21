@@ -41,6 +41,18 @@ export default function Header() {
           >
             View Category
           </Link>
+          <Link
+            href="/add-article"
+            className="hover:text-indigo-400 transition-colors duration-200"
+          >
+            Add Article
+          </Link>
+          <Link
+            href="/view-article"
+            className="hover:text-indigo-400 transition-colors duration-200"
+          >
+            View Articles
+          </Link>
 
           {username ? (
             <>

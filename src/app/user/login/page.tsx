@@ -14,7 +14,7 @@ export default function LoginPage() {
         "https://acesoftech.co.in/API/blog_api/login.php",
         form
       );
-      localStorage.setItem("username", form.email); // fallback if no name
+      localStorage.setItem("username", form.email); 
       alert("Login successful");
       router.push("/dashboard");
     } catch (err) {
@@ -23,7 +23,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="max-w-md mx-auto mt-10 ">
       <h2 className="text-2xl font-bold mb-4">Login</h2>
       <form onSubmit={handleLogin} className="space-y-4">
         <input
