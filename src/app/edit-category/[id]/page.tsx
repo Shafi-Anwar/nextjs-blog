@@ -10,6 +10,7 @@ export default function EditCategoryPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!id) return;
       const res = await getSingleCategory(id as string);
       if (res) {
         setCategory({
@@ -24,6 +25,7 @@ export default function EditCategoryPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      if (!id) return;
       await updateCategory(id as string, category);
       alert("Category updated successfully");
       router.push("/view-category");
