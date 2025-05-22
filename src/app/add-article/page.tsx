@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { createArticle } from "@/lib/api";
-
+import { useParams } from "next/navigation";
 export default function AddArticlePage() {
   const [article, setArticle] = useState({
     article_title: "",

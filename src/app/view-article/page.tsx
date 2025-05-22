@@ -1,15 +1,16 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
 import { getAllArticles, deleteArticle } from "@/lib/api";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 interface Article {
   id: string;
-  article_title: string;
-  article_des: string;
+  post_tittle: string;
+  post_des: string;
 }
 
 export default function ViewArticles() {
+  const { id } = useParams();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +21,7 @@ export default function ViewArticles() {
     setLoading(true);
     setError(null);
     try {
-      const data = await getAllArticles();
+      const data = await getAllArticles(id as string);
       setArticles(data);
     } catch (err) {
       console.error(err);
@@ -28,7 +29,7 @@ export default function ViewArticles() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     fetchArticles();
@@ -39,7 +40,7 @@ export default function ViewArticles() {
       return;
     setDeletingId(id);
     try {
-      await deleteArticle(id); // Now correctly uses POST with body
+      await deleteArticle(id);
       await fetchArticles();
     } catch (err) {
       console.error(err);
@@ -103,10 +104,10 @@ export default function ViewArticles() {
                   {i + 1}
                 </td>
                 <td className="p-3 border border-gray-300 text-gray-900 font-medium">
-                  {art.article_title}
+                  {art.post_tittle}
                 </td>
                 <td className="p-3 border border-gray-300 text-gray-700">
-                  {art.article_des}
+                  {art.post_des}
                 </td>
                 <td className="p-3 border border-gray-300 text-center space-x-3">
                   <button

@@ -8,12 +8,6 @@ interface LoginCredentials {
   password: string;
 }
 
-interface Article {
-  id: string;
-  article_title: string;
-  article_des: string;
-}
-
 interface Category {
   id: string;
   post_tittle: string;
@@ -78,20 +72,28 @@ export const deletePost = async (postId: number) => {
   });
   return response.data;
 };
-
-export const getAllArticles = async (): Promise<Article[]> => {
-  const response = await axios.post(`${API_BASE_URL}add-article.php`, {
-    mode: "view-all",
-  });
+export interface Article {
+  id: string;
+  post_tittle: string;
+  post_des: string;
+}export const getAllArticles = async (id: string) => {
+  const response = await axios.get(
+    `${API_BASE_URL}add-article.php?mode=view`
+  );
   return response.data.records || [];
 };
-export const createArticle = async (article: {
-  article_title: string;
-  article_des: string;
-}) => {
-  const response = await axios.post(`${API_BASE_URL}add-article.php`, article);
+
+export const createArticle = async (
+  article: { article_title: string; article_des: string },
+
+) => {
+  const response = await axios.post(
+    `${API_BASE_URL}add-article.php?mode=add`,
+    article
+  );
   return response.data;
 };
+
 
 export const deleteArticle = async (id: string | number) => {
   const response = await axios.post(`${API_BASE_URL}delete-article.php`, {
