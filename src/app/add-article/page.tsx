@@ -14,8 +14,10 @@ export default function AddArticlePage() {
       await createArticle(article);
       alert("Article added successfully");
       setArticle({ article_title: "", article_des: "" });
+      console.log(article);
     } catch (error) {
       alert("Failed to add article");
+      console.error("Error adding article:", error);
     }
   };
 

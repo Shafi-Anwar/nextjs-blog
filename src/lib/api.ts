@@ -79,14 +79,12 @@ export const deletePost = async (postId: number) => {
   return response.data;
 };
 
-// Articles
 export const getAllArticles = async (): Promise<Article[]> => {
-  const response = await axios.get(
-    `${API_BASE_URL}add-article.php?mode=view-all`
-  );
+  const response = await axios.post(`${API_BASE_URL}add-article.php`, {
+    mode: "view-all",
+  });
   return response.data.records || [];
 };
-
 export const createArticle = async (article: {
   article_title: string;
   article_des: string;
